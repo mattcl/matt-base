@@ -1,0 +1,159 @@
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+export ZSH_THEME="matt"
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+export UPDATE_ZSH_DAYS=30
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+export DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(<%= (%w(git zsh256color rbenv) + node['matt-base']['oh-my-zsh']['additional_plugins'].keys).join(' ') %>)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+export PATH=/opt/chefdk/bin:$HOME/.cargo/bin:$HOME/bin:$HOME/scripts:/usr/local/bin:$PATH:$HOME/.local/bin
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+export LC_ALL=C
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_RED=$ESC_SEQ"31;11m"
+COL_GREEN=$ESC_SEQ"32;11m"
+COL_YELLOW=$ESC_SEQ"33;11m"
+COL_BLUE=$ESC_SEQ"34;11m"
+COL_MAGENTA=$ESC_SEQ"35;11m"
+COL_CYAN=$ESC_SEQ"36;11m"
+function print_colored_text {
+  local color="$1"
+  local text="$2"
+  local color_code="COL_$color"
+  echo -n -e "${(P)color_code}$text$COL_RESET"
+}
+
+# change env vars based on current directory path
+function chpwd() {
+  switch_environment_profiles
+}
+
+function detect_env_profile {
+    local profile
+    zstyle -s ":chpwd:profiles:${PWD}" profile profile || profile='default'
+    profile=${(U)profile}
+    if [ "$profile" != "$ENV_PROFILE" ]; then
+        print "Switching to profile: $profile"
+    fi
+
+    ENV_PROFILE="$profile"
+}
+
+function switch_environment_profiles {
+    detect_env_profile
+    config_key="ENV_$ENV_PROFILE"
+    for key value in ${(kvP)config_key}; do
+        export $key=$value
+    done
+
+    # Taken from grml zshrc, allow chpwd_profile_functions()
+    if (( ${+functions[chpwd_profile_$ENV_PROFILE]} )) ; then
+        chpwd_profile_${ENV_PROFILE}
+    fi
+}
+
+function chpwd_profile_DEFAULT {
+  # export FOO='bar'
+}
+
+# function chpwd_profile_BAZ {
+#    export FOO='baz'
+# }
+
+# profile directories
+zstyle ":chpwd:profiles:$HOME/code/zununu(|/|/*)" profile zununu
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [[ ! "$PATH" =~ "$HOME/.fzf/bin" ]]; then
+  export PATH="$PATH:$HOME/.fzf/bin"
+fi
+
+if [[ ! "$MANPATH" =~ "$HOME/.fzf/man" && -d "$HOME/.fzf/man" ]]; then
+  export MANPATH="$MANPATH:$HOME/.fzf/man"
+fi
+
+[[ $- =~ i ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+
+source "$HOME/.fzf/shell/key-bindings.zsh"
+
+# set initial environment
+chpwd
+
+# taskwarrior
+[ -f ~/.task.zsh ] && source "$HOME/.task.zsh"
+
+# sigh, fix this forever hopefully
+setxkbmap -option ctrl:nocaps
+
+# set initial environment
+chpwd
+
+# added by travis gem
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
+alias ls='exa'

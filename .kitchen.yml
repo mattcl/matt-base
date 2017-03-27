@@ -1,0 +1,25 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[matt-base::default]
+      - recipe[matt-base::python]
+    attributes:
+
+  - name: full
+    run_list:
+      - recipe[matt-base::default]
+      - recipe[matt-base::python]
+      - recipe[matt-base::ruby]
+      - recipe[matt-base::vim]
+    attributes:
