@@ -2,7 +2,7 @@
 # Cookbook Name:: matt-base
 # Recipe:: vim
 #
-# Copyright (c) 2015 The Authors, All Rights Reserved.
+# The MIT License (MIT)
 git '/tmp/vim' do
   repository 'https://github.com/vim/vim.git'
   action :sync
@@ -73,7 +73,7 @@ node['matt-base']['users'].each do |username, _|
   execute 'compile-ycm' do
     user username
     cwd ycm_path
-    command "./install.sh#{node['matt-base']['vim']['ycm_install_flags']}"
+    command "python2.7 ./install.py#{node['matt-base']['vim']['ycm_install_flags']}"
     only_if { File.exist?(ycm_path) }
     action :nothing
   end
