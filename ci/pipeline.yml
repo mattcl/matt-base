@@ -15,11 +15,12 @@ jobs:
       - task: converge-1404
         file: repo/ci/converge.yml
         params:
-          KITCHEN_DOCKER_SOCKET: "{{docker-socket}}"
+          KITCHEN_DOCKER_SOCKET: {{docker-socket}}
           suite: full-ubuntu-1404
         ensure:
-          file: repo/ci/cleanup.sh
-          params:
-            KITCHEN_DOCKER_SOCKET: "{{docker-socket}}"
-            suite: full-ubuntu-1404
+          - task: cleanup
+            file: repo/ci/cleanup.yml
+            params:
+              KITCHEN_DOCKER_SOCKET: {{docker-socket}}
+              suite: full-ubuntu-1404
 
