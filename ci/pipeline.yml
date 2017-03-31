@@ -18,9 +18,9 @@ jobs:
           KITCHEN_DOCKER_SOCKET: {{docker-socket}}
           suite: full-ubuntu-1404
         ensure:
-          - task: cleanup
-            file: repo/ci/cleanup.yml
-            params:
-              KITCHEN_DOCKER_SOCKET: {{docker-socket}}
-              suite: full-ubuntu-1404
+          task: cleanup
+          file: repo/ci/cleanup.yml
+          params:
+            KITCHEN_DOCKER_SOCKET: {{docker-socket}}
+            suite: full-ubuntu-1404
 
