@@ -13,6 +13,7 @@ jobs:
     build_logs_to_retain: 100
     plan:
       - get: repo
+        trigger: true
       - aggregate:
         - task: converge-1404
           file: repo/ci/converge.yml
@@ -37,3 +38,12 @@ jobs:
               KITCHEN_DOCKER_SOCKET: {{docker-socket}}
               suite: full-ubuntu-1604
 
+  - name: package
+    public: false
+    serial: true
+    build_logs_to_retain: 100
+    plan:
+      - get: repo
+        passed: [converge]
+      - task: berks-package
+        file: repo/ci/package.yml
