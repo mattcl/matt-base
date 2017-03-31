@@ -3,7 +3,7 @@ resources:
   - name: repo
     type: git
     source:
-      url: https://github.com/mattcl/matt-base.git
+      uri: https://github.com/mattcl/matt-base.git
 
 jobs:
   - name: release
