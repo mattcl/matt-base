@@ -4,23 +4,36 @@ resources:
     type: git
     source:
       uri: https://github.com/mattcl/matt-base.git
+      branch: master
 
 jobs:
-  - name: release
+  - name: converge
     public: false
     serial: true
     build_logs_to_retain: 100
     plan:
       - get: repo
-      - task: converge-1404
-        file: repo/ci/converge.yml
-        params:
-          KITCHEN_DOCKER_SOCKET: {{docker-socket}}
-          suite: full-ubuntu-1404
-        ensure:
-          task: cleanup
-          file: repo/ci/cleanup.yml
+      - aggregate:
+        - task: converge-1404
+          file: repo/ci/converge.yml
           params:
             KITCHEN_DOCKER_SOCKET: {{docker-socket}}
             suite: full-ubuntu-1404
+          ensure:
+            task: cleanup-1404
+            file: repo/ci/cleanup.yml
+            params:
+              KITCHEN_DOCKER_SOCKET: {{docker-socket}}
+              suite: full-ubuntu-1404
+        - task: converge-1604
+          file: repo/ci/converge.yml
+          params:
+            KITCHEN_DOCKER_SOCKET: {{docker-socket}}
+            suite: full-ubuntu-1604
+          ensure:
+            task: cleanup-1604
+            file: repo/ci/cleanup.yml
+            params:
+              KITCHEN_DOCKER_SOCKET: {{docker-socket}}
+              suite: full-ubuntu-1604
 
