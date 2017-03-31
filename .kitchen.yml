@@ -2,6 +2,7 @@
 driver:
   name: docker
   use_sudo: false
+  socket: <%= ENV['KITCHEN_DOCKER_SOCKET'] || "unix:///var/run/docker.sock" %>
 
 provisioner:
   name: chef_zero
@@ -18,7 +19,6 @@ suites:
   - name: default
     run_list:
       - recipe[matt-base::default]
-      - recipe[matt-base::python]
     attributes:
 
   - name: full

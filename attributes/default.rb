@@ -7,7 +7,7 @@ default['matt-base']['users']['matt'] = {
 
 # packages
 default['matt-base']['packages']['installed'] = {
-  'ctags'           => nil,
+  'exuberant-ctags' => nil,
   'gcc'             => nil,
   'htop'            => nil,
   'libevent-dev'    => nil,
