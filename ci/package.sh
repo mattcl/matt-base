@@ -6,4 +6,4 @@ verison=(chef exec ruby ci/extract_version.rb)
 berks package
 popd
 
-cp cookbooks-*.tar.gz packaged-cookbook/${version}.tar.gz
+cp repo/cookbooks-*.tar.gz packaged-cookbook/${version}.tar.gz
