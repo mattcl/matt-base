@@ -44,6 +44,7 @@ jobs:
     build_logs_to_retain: 100
     plan:
       - get: repo
+        trigger: true
         passed: [converge]
       - task: berks-package
         file: repo/ci/package.yml
