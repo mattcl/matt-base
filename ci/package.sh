@@ -2,7 +2,8 @@
 set -ex
 
 pushd repo
-verison=(chef exec ruby ci/extract_version.rb)
+version=$(chef exec ruby ci/extract_version.rb)
+echo $version
 berks package
 popd
 
