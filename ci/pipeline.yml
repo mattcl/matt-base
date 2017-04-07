@@ -19,24 +19,12 @@ jobs:
           file: repo/ci/converge.yml
           params:
             KITCHEN_DOCKER_SOCKET: {{docker-socket}}
-            suite: full-ubuntu-1404
-          ensure:
-            task: cleanup-1404
-            file: repo/ci/cleanup.yml
-            params:
-              KITCHEN_DOCKER_SOCKET: {{docker-socket}}
-              suite: full-ubuntu-1404
+            suite: default-ubuntu-1404
         - task: converge-1604
           file: repo/ci/converge.yml
           params:
             KITCHEN_DOCKER_SOCKET: {{docker-socket}}
-            suite: full-ubuntu-1604
-          ensure:
-            task: cleanup-1604
-            file: repo/ci/cleanup.yml
-            params:
-              KITCHEN_DOCKER_SOCKET: {{docker-socket}}
-              suite: full-ubuntu-1604
+            suite: default-ubuntu-1604
 
   - name: package
     public: false
