@@ -27,6 +27,12 @@ suites:
       - recipe[matt-base::python]
     attributes:
 
+  - name: ruby
+    run_list:
+      - recipe[matt-base::default]
+      - recipe[matt-base::ruby]
+    attributes:
+
   - name: full
     run_list:
       - recipe[matt-base::default]

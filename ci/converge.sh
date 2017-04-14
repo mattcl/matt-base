@@ -4,7 +4,7 @@ set -x
 echo "KITCHEN_DOCKER_SOCKET=$KITCHEN_DOCKER_SOCKET"
 
 cd repo
-kitchen test $suite
+kitchen test $suite --no-color
 
 code=$?
 
