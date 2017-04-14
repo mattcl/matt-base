@@ -148,7 +148,9 @@ chpwd
 [ -f ~/.task.zsh ] && source "$HOME/.task.zsh"
 
 # sigh, fix this forever hopefully
-setxkbmap -option ctrl:nocaps
+if type setxkbmap &> /dev/null; then
+  setxkbmap -option ctrl:nocaps
+fi
 
 # set initial environment
 chpwd

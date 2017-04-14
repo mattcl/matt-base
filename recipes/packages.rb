@@ -6,6 +6,10 @@
 #
 include_recipe 'apt'
 
+if node['platform'] == 'ubuntu' && node['platform_version'] == '16.04'
+  node.override['matt-base']['packages']['installed']['python-minimal'] = nil
+end
+
 node['matt-base']['packages']['installed'].each do |name, vers|
   package name do
     if vers == :latest
