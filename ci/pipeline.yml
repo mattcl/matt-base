@@ -43,7 +43,7 @@ jobs:
             channel: '#ci'
             username: ci-bot
             text: |
-              <!here> converge of matt-base failed
+              <!here> FAILURE converging matt-base
               see $ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
               or $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
@@ -63,7 +63,7 @@ jobs:
             channel: '#ci'
             username: ci-bot
             text: |
-              <!here> package of matt-base failed
+              <!here> FAILURE packaging matt-base
               see $ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
               or $ATC_EXTERNAL_URL/builds/$BUILD_ID
         on_success:
@@ -72,6 +72,6 @@ jobs:
             channel: '#ci'
             username: ci-bot
             text: |
-              <!here> pipeline $BUILD_PIPELINE_NAME succeeded
+              <!here> SUCCESS pipeline $BUILD_PIPELINE_NAME succeeded
               see $ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
               or $ATC_EXTERNAL_URL/builds/$BUILD_ID
