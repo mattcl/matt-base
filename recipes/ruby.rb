@@ -27,7 +27,7 @@ node['matt-base']['ruby']['versions'].each do |version, data|
     rbenv_global version
   end
 
-  rbenv_gem 'bunlder' do
+  rbenv_gem 'bundler' do
     rbenv_version version
     action :install
   end
