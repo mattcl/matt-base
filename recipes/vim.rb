@@ -18,7 +18,7 @@ include_recipe 'apt'
 include_recipe 'git'
 include_recipe 'build-essential::default'
 
-node.set['cmake']['install_method'] = 'source'
+node.normal['cmake']['install_method'] = 'source'
 
 include_recipe 'cmake::default'
 

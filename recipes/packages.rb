@@ -26,7 +26,7 @@ include_recipe 'tig'
 include_recipe 'zsh'
 include_recipe 'build-essential::default'
 
-node.set['cmake']['install_method'] = 'source'
+node.normal['cmake']['install_method'] = 'source'
 include_recipe 'cmake::default'
 
 # exa was built locally and checked into the cookbook
