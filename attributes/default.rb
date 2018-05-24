@@ -42,9 +42,12 @@ default['matt-base']['oh-my-zsh']['additional_plugins'] = {
   'fzf-marks' => {
     'url' => 'https://github.com/urbainvaes/fzf-marks.git'
   },
+  'vi-mode-custom' => {
+    'url' => 'https://github.com/mattcl/vi-mode-custom.git'
+  },
   'virtualenv-mod' => {
     'url' => 'https://github.com/mattcl/virtualenv-mod.git'
-  }
+  },
 }
 
 default['matt-base']['fzf']['url'] =

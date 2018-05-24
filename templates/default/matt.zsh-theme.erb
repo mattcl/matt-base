@@ -93,5 +93,5 @@ ssh_prompt() {
 ZSH_THEME_VIRTUALENV_PREFIX=': '
 ZSH_THEME_VIRTUALENV_SUFFIX=''
 
-PROMPT='%F{yellow}%m$(ssh_prompt)%F{white}:%~ $ '
+PROMPT='%F{yellow}%m$(ssh_prompt)%F{white}:%~ [$(vi_mode_prompt_info)] $ '
 RPROMPT='$(language_versions)$(vcs_status)%{$reset_color%}'
