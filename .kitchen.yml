@@ -9,10 +9,6 @@ provisioner:
 
 platforms:
   - name: ubuntu-18.04
-    attributes:
-      matt-base:
-        python3:
-          version: '3.6'
 
 suites:
   - name: default

@@ -7,26 +7,27 @@ default['matt-base']['users']['matt'] = {
 
 # packages
 default['matt-base']['packages']['installed'] = {
-  'exuberant-ctags' => nil,
-  'gcc'             => nil,
-  'htop'            => nil,
-  'libevent-dev'    => nil,
-  'libncurses5-dev' => nil,
-  'libperl-dev'     => nil,
-  'libreadline-dev' => nil,
-  'libssl-dev'      => nil,
-  'libx11-dev'      => nil,
-  'libxpm-dev'      => nil,
-  'libxt-dev'       => nil,
-  'lua5.1'          => nil,
-  'lua5.1-dev'      => nil,
-  'make'            => nil,
-  'ncurses-base'    => nil,
-  'perl'            => nil,
-  'ruby-dev'        => nil,
-  'tree'            => nil,
-  'vim'             => nil,
-  'zlib1g-dev'      => nil
+  'exuberant-ctags'   => nil,
+  'gcc'               => nil,
+  'htop'              => nil,
+  'libevent-dev'      => nil,
+  'libncurses5-dev'   => nil,
+  'libperl-dev'       => nil,
+  'libreadline-dev'   => nil,
+  'libssl-dev'        => nil,
+  'libx11-dev'        => nil,
+  'libxpm-dev'        => nil,
+  'libxt-dev'         => nil,
+  'lua5.1'            => nil,
+  'lua5.1-dev'        => nil,
+  'make'              => nil,
+  'ncurses-base'      => nil,
+  'perl'              => nil,
+  'python3-distutils' => nil,
+  'ruby-dev'          => nil,
+  'tree'              => nil,
+  'vim'               => nil,
+  'zlib1g-dev'        => nil,
 }
 
 default['matt-base']['ripgrep']['url'] =
@@ -41,6 +42,9 @@ default['matt-base']['oh-my-zsh']['url'] =
 default['matt-base']['oh-my-zsh']['additional_plugins'] = {
   'fzf-marks' => {
     'url' => 'https://github.com/urbainvaes/fzf-marks.git'
+  },
+  'syntax-highlighting' => {
+    'url' => 'https://github.com/zsh-users/fzf-syntax-highlighting.git'
   },
   'vi-mode-custom' => {
     'url' => 'https://github.com/mattcl/vi-mode-custom.git'
@@ -64,7 +68,7 @@ default['matt-base']['python2']['packages'] = {
   'virtualenvwrapper' => nil
 }
 
-default['matt-base']['python3']['version'] = '3.4'
+default['matt-base']['python3']['version'] = '3.6'
 default['matt-base']['python3']['pip_version'] = '9.0.1'
 default['matt-base']['python3']['setuptools_version'] = '23.1.0'
 default['matt-base']['python3']['packages'] = {}
