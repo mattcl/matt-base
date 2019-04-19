@@ -44,7 +44,7 @@ default['matt-base']['oh-my-zsh']['additional_plugins'] = {
     'url' => 'https://github.com/urbainvaes/fzf-marks.git'
   },
   'syntax-highlighting' => {
-    'url' => 'https://github.com/zsh-users/fzf-syntax-highlighting.git'
+    'url' => 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
   },
   'vi-mode-custom' => {
     'url' => 'https://github.com/mattcl/vi-mode-custom.git'
