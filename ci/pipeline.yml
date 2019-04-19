@@ -11,6 +11,8 @@ resources:
     source:
       uri: https://github.com/mattcl/matt-base.git
       branch: master
+      ignore_paths:
+        - ci/**
 
   - name: notify
     type: slack-alert
