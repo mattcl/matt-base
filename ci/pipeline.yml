@@ -19,6 +19,13 @@ resources:
     source:
       url: ((slack_hook))
 
+  - name: nightly-trigger
+    type: time
+    source:
+      # UTC
+      start: 8:00 AM
+      stop: 10:00 AM
+
 jobs:
   - name: converge
     public: false
@@ -26,6 +33,8 @@ jobs:
     build_logs_to_retain: 100
     plan:
       - get: repo
+        trigger: true
+      - get: nightly-trigger
         trigger: true
       - aggregate:
           - task: converge-18.04
@@ -41,6 +50,10 @@ jobs:
           put: notify
           params:
             alert_type: aborted
+        on_success:
+          put: notify
+          params:
+            alert_type: success
 
   - name: package
     public: false
