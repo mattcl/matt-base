@@ -5,7 +5,7 @@
 # The MIT License (MIT)
 #
 include_recipe 'ruby_build::default'
-include_recipe 'ruby_rbenv::system_install'
+rbenv_system_install 'foo'
 
 members = []
 node['matt-base']['rbenv']['users'].each do |user, enabled|

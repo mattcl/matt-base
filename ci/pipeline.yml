@@ -1,10 +1,9 @@
 ---
 resource_types:
-- name: slack-notification
-  type: docker-image
-  source:
-    repository: cfcommunity/slack-notification-resource
-    tag: latest
+  - name: slack-alert
+    type: docker-image
+    source:
+      repository: arbourd/concourse-slack-alert-resource
 
 resources:
   - name: repo
@@ -13,10 +12,10 @@ resources:
       uri: https://github.com/mattcl/matt-base.git
       branch: master
 
-  - name: slack
-    type: slack-notification
+  - name: notify
+    type: slack-alert
     source:
-      url: {{slack-webhook}}
+      url: ((slack_hook))
 
 jobs:
   - name: converge
@@ -27,25 +26,19 @@ jobs:
       - get: repo
         trigger: true
       - aggregate:
-        - task: converge-1404
-          file: repo/ci/converge.yml
-          params:
-            KITCHEN_DOCKER_SOCKET: {{docker-socket}}
-            suite: full-ubuntu-1404
-        - task: converge-1604
-          file: repo/ci/converge.yml
-          params:
-            KITCHEN_DOCKER_SOCKET: {{docker-socket}}
-            suite: full-ubuntu-1604
+          - task: converge-18.04
+            file: repo/ci/converge.yml
+            params:
+              KITCHEN_DOCKER_SOCKET: ((docker_socket))
+              suite: full-ubuntu-1804
         on_failure:
-          put: slack
+          put: notify
           params:
-            channel: '#ci'
-            username: ci-bot
-            text: |
-              <!here> FAILURE converging matt-base
-              see $ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
-              or $ATC_EXTERNAL_URL/builds/$BUILD_ID
+            alert_type: failed
+        on_abort:
+          put: notify
+          params:
+            alert_type: aborted
 
   - name: package
     public: false
@@ -58,20 +51,14 @@ jobs:
       - task: berks-package
         file: repo/ci/package.yml
         on_failure:
-          put: slack
+          put: notify
           params:
-            channel: '#ci'
-            username: ci-bot
-            text: |
-              <!here> FAILURE packaging matt-base
-              see $ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
-              or $ATC_EXTERNAL_URL/builds/$BUILD_ID
+            alert_type: failed
+        on_abort:
+          put: notify
+          params:
+            alert_type: aborted
         on_success:
-          put: slack
+          put: notify
           params:
-            channel: '#ci'
-            username: ci-bot
-            text: |
-              <!here> SUCCESS pipeline $BUILD_PIPELINE_NAME succeeded
-              see $ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
-              or $ATC_EXTERNAL_URL/builds/$BUILD_ID
+            alert_type: success
