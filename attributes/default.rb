@@ -7,9 +7,12 @@ default['matt-base']['users']['matt'] = {
 
 # packages
 default['matt-base']['packages']['installed'] = {
+  'asciinema'         => nil,
   'exuberant-ctags'   => nil,
   'gcc'               => nil,
+  'goaccess'          => nil,
   'htop'              => nil,
+  'jq'                => nil,
   'libevent-dev'      => nil,
   'libncurses5-dev'   => nil,
   'libperl-dev'       => nil,
@@ -18,6 +21,7 @@ default['matt-base']['packages']['installed'] = {
   'libx11-dev'        => nil,
   'libxpm-dev'        => nil,
   'libxt-dev'         => nil,
+  'lnav'              => nil,
   'lua5.1'            => nil,
   'lua5.1-dev'        => nil,
   'make'              => nil,
@@ -25,8 +29,11 @@ default['matt-base']['packages']['installed'] = {
   'perl'              => nil,
   'python3-distutils' => nil,
   'ruby-dev'          => nil,
+  'shellcheck'        => nil,
+  'thefuck'           => nil,
   'tree'              => nil,
   'vim'               => nil,
+  'yank'              => nil,
   'zlib1g-dev'        => nil,
 }
 
