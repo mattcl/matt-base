@@ -4,7 +4,7 @@ maintainer_email 'mchunlum@gmail.com'
 license          'mit'
 description      'Installs/Configures matt-base'
 long_description 'Installs/Configures matt-base'
-version          '2.1.0'
+version          '2.2.0'
 
 depends 'apt'
 depends 'ark'

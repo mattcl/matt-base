@@ -7,4 +7,5 @@
 include_recipe 'matt-base::default'
 include_recipe 'matt-base::python'
 include_recipe 'matt-base::ruby'
+include_recipe 'matt-base::rust'
 include_recipe 'matt-base::vim'

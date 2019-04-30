@@ -30,8 +30,5 @@ suites:
 
   - name: full
     run_list:
-      - recipe[matt-base::default]
-      - recipe[matt-base::python]
-      - recipe[matt-base::ruby]
-      - recipe[matt-base::vim]
+      - recipe[matt-base::full]
     attributes:
