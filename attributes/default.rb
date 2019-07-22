@@ -65,20 +65,14 @@ default['matt-base']['fzf']['url'] =
   'https://github.com/junegunn/fzf.git'
 
 # python
-default['matt-base']['python2']['version'] = '2.7'
-default['matt-base']['python2']['pip_version'] = '9.0.1'
-# there's a bug in version 24.0.0 of setuptools for python2
-default['matt-base']['python2']['setuptools_version'] = '23.1.0'
-default['matt-base']['python2']['packages'] = {
-  'clustershell'      => nil,
-  'virtualenv'        => nil,
-  'virtualenvwrapper' => nil
-}
-
 default['matt-base']['python3']['version'] = '3.6'
 default['matt-base']['python3']['pip_version'] = '9.0.1'
 default['matt-base']['python3']['setuptools_version'] = '23.1.0'
-default['matt-base']['python3']['packages'] = {}
+default['matt-base']['python3']['packages'] = {
+  'clustershell'      => nil,
+  'virtualenv'        => nil,
+  'virtualenvwrapper' => nil,
+}
 
 # ruby
 default['matt-base']['ruby']['versions']['2.4.1']['enabled'] = true
